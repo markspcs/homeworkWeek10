@@ -2,7 +2,8 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const inquirer = require("inquirer");
-const card = require("./lib/createCard");
+const card = require("./templates/createCard");
+const createHtml = require("./templates/createHtml");
 
 const debug = 1;
 
@@ -24,6 +25,7 @@ async function askUser() {
 /////////////////////////////////////////////////////////
 //create the html using the array of objects
 function buildHtml(people) {
+    let html;
     for (i = 0; i < people.length; i++) {
         debug && console.log(people[i]);
         let person = people[i];
@@ -31,23 +33,24 @@ function buildHtml(people) {
             case 'Manager':
                 debug && console.log("manager " + person);
                 const manager = new Manager(person.name, person.id, person.email, person.officeNumber);
-                html = card.managerHtml(manager);
+                html += card.managerHtml(manager);
                 console.log(html);
                 break;
             case 'Engineer':
                 debug && console.log("engineer " + person);
                 const engineer = new Engineer(person.name, person.id, person.email, person.github);
-                html = card.engineerHtml(engineer);
+                html += card.engineerHtml(engineer);
                 console.log(html);
                 break;
             case 'Intern':
                 debug && console.log("intern " + person);
                 const intern = new Intern(person.name, person.id, person.email, person.school);
+                html += card.internHtml(intern);
                 break;
         }
 
     }
-
+    createHtml.main(html);
 }
 ///////////////////////////////////////////////////////////////////
 //prompt user for input and return username location
