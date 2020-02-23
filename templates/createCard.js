@@ -4,7 +4,7 @@ module.exports = {
                     <div class="card h-100 shadow rounded">
                         <div class="card-header">
                          <h2>${e.name}</h2>
-                         <h2><i class="fas fa-glasses"> </i> Manger</h2>
+                         <h2><i class="fas fa-mug-hot"> </i> Manger</h2>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title border border-dark p-2">ID: ${e.id}</h5>
@@ -34,7 +34,7 @@ module.exports = {
                     <div class="card h-100 shadow rounded">
                         <div class="card-header">
                          <h2>${e.name}</h2>
-                         <h2><i class="fas fa-glasses"> </i> Intern</h2>
+                         <h2><i class="fas fa-user-graduate"> </i> Intern</h2>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title border border-dark p-2">ID: ${e.id}</h5>

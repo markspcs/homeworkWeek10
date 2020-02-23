@@ -1,0 +1,18 @@
+.header {
+    background-color: rgb(139, 1, 1);
+    color: white;
+    height: 120px;
+}
+
+.card-header {
+    background-color: rgb(68, 106, 218);
+    color: white;
+}
+
+.card-body {
+    background-color: rgb(238, 232, 232);
+}
+
+.card-title {
+    background-color: white;
+}

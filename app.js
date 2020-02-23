@@ -4,6 +4,7 @@ const Manager = require("./lib/Manager");
 const inquirer = require("inquirer");
 const card = require("./templates/createCard");
 const createHtml = require("./templates/createHtml");
+const fs = require('fs');
 
 const debug = 1;
 
@@ -17,15 +18,15 @@ async function askUser() {
         const response = await promptUser();
         people.push(response);
         addMore = response.end;
-        debug && console.log(response);
+        debug && console.log("askUser do loop" + response);
     } while (addMore === "y");
-    debug && console.log(people);
+    debug && console.log("askUser done with do loop:" + people);
     buildHtml(people);
 }
 /////////////////////////////////////////////////////////
 //create the html using the array of objects
 function buildHtml(people) {
-    let html;
+    let html = "";
     for (i = 0; i < people.length; i++) {
         debug && console.log(people[i]);
         let person = people[i];
@@ -34,23 +35,30 @@ function buildHtml(people) {
                 debug && console.log("manager " + person);
                 const manager = new Manager(person.name, person.id, person.email, person.officeNumber);
                 html += card.managerHtml(manager);
-                console.log(html);
+                console.log("manager card in buildHtml switch: " + html);
                 break;
             case 'Engineer':
                 debug && console.log("engineer " + person);
                 const engineer = new Engineer(person.name, person.id, person.email, person.github);
                 html += card.engineerHtml(engineer);
-                console.log(html);
+                console.log("engineer card in buildHtml switch: " + html);
                 break;
             case 'Intern':
                 debug && console.log("intern " + person);
                 const intern = new Intern(person.name, person.id, person.email, person.school);
+                console.log("Intern card in buildHtml switch: " + html);
                 html += card.internHtml(intern);
                 break;
         }
 
     }
-    createHtml.main(html);
+    var fullHtml = createHtml.main(html);
+    debug && console.log("fullHtml in buildHtml function" + fullHtml);
+    fs.writeFile('./output/team.html', fullHtml, (err) => {
+        if (err) {
+          return console.log(err);
+        }
+    });
 }
 ///////////////////////////////////////////////////////////////////
 //prompt user for input and return username location
