@@ -6,7 +6,7 @@ const card = require("./templates/createCard");
 const createHtml = require("./templates/createHtml");
 const fs = require('fs');
 
-const debug = 1;
+const debug = 0;
 
 askUser();
 //////////////////////////////////////////////////////////////
